@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: @profile.active@
+    group:
+      "dev": dev,Mp,devMysql,devredis,devCache,devOther,devMail,devFile,devJWT
+      "test": test,Mp,testMysql,testredis,testCache,testOther,testMail,testFile,testJWT
+  web:
+    resources:
+      static-locations: classpath:/static/static/,classpath:/static/img/,classpath:/static/fonts/,classpath:/static/
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.security.mapper.BookMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.security.domain.Book">
+            <id property="bId" column="b_id" jdbcType="INTEGER"/>
+            <result property="bName" column="b_name" jdbcType="VARCHAR"/>
+            <result property="bType" column="b_type" jdbcType="VARCHAR"/>
+            <result property="bDes" column="b_des" jdbcType="VARCHAR"/>
+            <result property="bAuthor" column="b_author" jdbcType="VARCHAR"/>
+            <result property="bVersion" column="b_version" jdbcType="INTEGER"/>
+            <result property="bIsBeenDeleted" column="b_is_been_deleted" jdbcType="INTEGER"/>
+            <result property="bUri" column="b_uri" jdbcType="VARCHAR"/>
+            <result property="bFiletype" column="b_filetype" jdbcType="VARCHAR"/>
+            <result property="ISBN" column="ISBN" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        b_id,b_name,b_type,
+        b_des,b_author,b_version,
+        b_is_been_deleted,b_uri,b_filetype,ISBN
+    </sql>
+    <delete id="deleteByBIdBook">
+        delete from book where b_id=#{b_id}
+    </delete>
+    <delete id="deleteByISBN">
+        delete from book where ISBN=#{ISBN}
+    </delete>
+    <select id="selectBookIsExists" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        <where>
+            <if test="ISBN!=null">
+                ISBN=#{ISBN} or
+            </if>
+            <if test="b_uri!=null">
+                b_uri=#{bUri} or
+            </if>
+            <if test="b_id!=null">
+                b_id=#{bId}
+            </if>
+        </where>
+
+
+    </select>
+
+    <select id="selectBookByISBN" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where ISBN=#{#ISBN};
+    </select>
+</mapper>

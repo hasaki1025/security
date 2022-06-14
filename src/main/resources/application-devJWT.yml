@@ -1,0 +1,5 @@
+JWT:
+  defaultTTL: 7200000
+  FreeLoginTTL: 7200000
+
+

@@ -1,0 +1,8 @@
+
+AdminUser:
+  password: "root"
+
+Elasticsearch:
+  host: 192.168.76.107
+  port: 9200
+  BookIndexName: book

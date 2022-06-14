@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>ss</td>
+        <td>gg</td>
+        <td><button>ffff</button></td>
+        <td>ss</td>
+    </tr>
+    <tr>
+        <td>hh</td>
+        <td>ssv</td>
+        <td>gg</td>
+        <td>ss</td>
+    </tr>
+</table>
+</body>
+<script>
+    let tr=document.querySelector('table tr:first-child');
+    console.log(tr);
+    console.log(tr.children.length);
+    let btn=document.createElement('button');
+    btn.innerHTML='添加';
+    tr.append(btn);
+</script>
+</html>

@@ -1,0 +1,32 @@
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: fastjson
+      limit: 100
+  remote:
+    default:
+      type: redis
+      host: 192.168.76.107
+      port: 6379
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        maxTotal: 50
+        minIdle: 5
+        maxIdle: 20
+
+    TokenCache:
+      type: redis
+      host: 192.168.76.107
+      port: 6379
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        maxTotal: 50
+        minIdle: 5
+        maxIdle: 20

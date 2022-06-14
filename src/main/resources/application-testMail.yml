@@ -1,0 +1,15 @@
+spring:
+  #  邮箱发送配置
+  mail:
+    #    host不配置会注入失败
+    host: smtp.163.com
+    username: wdnmdwgzdl666@163.com
+    password: EFAEOYTWMSJYSZQF
+    default-encoding: utf-8
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.security.mapper.CollectMapper">
+
+    <resultMap id="BaseResultMap" type="com.boot.security.domain.Collect">
+            <id property="cId" column="c_id" jdbcType="INTEGER"/>
+            <result property="uId" column="u_id" jdbcType="INTEGER"/>
+            <result property="bId" column="b_id" jdbcType="INTEGER"/>
+            <result property="cIsBeenDelete" column="c_is_been_delete" jdbcType="INTEGER"/>
+            <result property="cVersion" column="c_version" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <resultMap id="BookResultMap" type="com.boot.security.domain.Book">
+        <id property="bId" column="b_id" jdbcType="INTEGER"/>
+        <result property="bName" column="b_name" jdbcType="VARCHAR"/>
+        <result property="bType" column="b_type" jdbcType="VARCHAR"/>
+        <result property="bDes" column="b_des" jdbcType="VARCHAR"/>
+        <result property="bAuthor" column="b_author" jdbcType="VARCHAR"/>
+        <result property="bVersion" column="b_version" jdbcType="INTEGER"/>
+        <result property="bIsBeenDeleted" column="b_is_been_deleted" jdbcType="INTEGER"/>
+        <result property="bUri" column="b_uri" jdbcType="VARCHAR"/>
+        <result property="bFiletype" column="b_filetype" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        c_id,u_id,b_id,
+        c_is_been_delete,c_version
+    </sql>
+    <sql id="Book_Column_List">
+        b.b_id,b.b_name,b.b_type,
+        b.b_des,b.b_author,b.b_version,
+        b.b_is_been_deleted,b.b_uri,b.b_filetype
+    </sql>
+    <insert id="insertOneBook">
+        insert into collect(u_id, b_id) values(#{u_id},#{b_id});
+    </insert>
+    <update id="updateCIsBeenDelete">
+        update collect set c_is_been_delete=0 where u_id=#{uId} and b_id=#{bId} and c_is_been_delete=1;
+    </update>
+
+    <select id="selectAllBookOfUser" parameterType="com.boot.security.domain.User" resultMap="BookResultMap">
+        select
+        <include refid="Book_Column_List"/>
+        from collect c join book b on b.b_id=c.b_id join user u on c.u_id = u.u_id
+        where u.u_id=#{uId} and c.c_is_been_delete=0;
+    </select>
+    <select id="selctOneBook" resultMap="BookResultMap">
+        select
+        <include refid="Book_Column_List"/>
+        from collect c join book b on b.b_id=c.b_id join user u on c.u_id = u.u_id
+        where u.u_id=#{uId} and b.b_id=#{bId};
+    </select>
+</mapper>
